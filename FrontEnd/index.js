@@ -128,6 +128,5 @@ filtersContainer.addEventListener("click", (event) => {
   }
 });
 
-  
 
 

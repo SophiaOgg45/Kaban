@@ -378,17 +378,17 @@ body{
 }
 
 #submitUserInfo{
+	background-color: #1D6154;
+	border-radius: 60px ;
+	border-width: 0px;
+	color: white;
+	cursor: pointer;
 	font-family: 'Syne';
 	font-size: 0.9em;
-	color: white;
-	background-color: #1D6154;
-	border-width: 0px;
-	text-align: center;
-	border-radius: 60px ;
-	padding: 7px 25px 7px 25px;
-	width: 150px;
 	margin-top: 30px;
-	cursor: pointer;
+	padding: 7px 25px 7px 25px;
+	text-align: center;
+	width: 150px;
 }
 
 #connexion a{
@@ -396,3 +396,15 @@ body{
 	font-size: 0.9em;
 	text-decoration: underline;
 }
+
+#modal1 {
+	width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  padding: 1em;
+  gap: 1em;
+  
+}
+

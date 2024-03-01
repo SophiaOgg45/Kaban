@@ -1,11 +1,8 @@
-const email = document.querySelector("form #email");
-const password = document.querySelector("form #password");
-const submit = document.querySelector("#submitUserInfo");
+const formLogin = document.querySelector("#formLogin");
 
-
-const btnLogin = submit.addEventListener("click", (a) => {
-    a.preventDefault();
-
+const btnLogin = formLogin.addEventListener("submit", (event) => {
+    event.preventDefault();
+const formData= new FormData (formLogin);
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         headers: {
@@ -13,17 +10,17 @@ const btnLogin = submit.addEventListener("click", (a) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            email: email.value,
-            password: password.value,
+            email: formData.get("email"),
+            password: formData.get("password"),
         }),
     })
     .then((response) => response.json())
     .then((data) => {
-        sessionStorage.setItem("Token", data.token);
-
+        
         if (data.message || data.error) {
             alert("Erreur dans l'identifiant ou le mot de passe");
         } else {
+            sessionStorage.setItem("Token", data.token);
             sessionStorage.setItem("isConnected", JSON.stringify(true));
             window.location.replace("index.html");
         }
