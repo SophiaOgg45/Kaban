@@ -408,8 +408,9 @@ body{
   
 }
 /* Modal */
+
 .modifier{
-	display: flex;
+
 	position: absolute;
 	right: 27rem;
 	bottom: -1rem;
@@ -431,6 +432,7 @@ body{
 	justify-content: center;
 	background-color: rgba(0, 0, 0, 0.30);
 	display: none;
+	
 }
 
 .modal-content {
@@ -530,11 +532,14 @@ body{
 	font-weight: 700;
 }
 
-.modal-add {
-    display: none;
+.modal-add ,
+.modal-deleted {
+   display: flex;
 	flex-direction: column;
 	width: 50%;
-	height: 80%;
+	height: 90%;
+
+	
 }
 
 .return-and-close {
@@ -630,4 +635,8 @@ body{
 	border: none;
 	margin-top: 32px;
 	margin-bottom: 45px;
+}
+
+.hidden {
+    display: none;
 }
