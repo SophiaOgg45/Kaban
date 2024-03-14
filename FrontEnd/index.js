@@ -129,4 +129,44 @@ filtersContainer.addEventListener("click", (event) => {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  // Sélection de l'élément "logout"
+  const logout = document.querySelector("header nav .logout");
+
+  // Fonction pour mettre à jour le texte du lien en fonction de l'état de connexion
+  function updateLogoutText() {
+      const loged = window.sessionStorage.getItem("loged");
+
+      if (loged === "true") {
+          logout.textContent = "logout";
+      } else {
+          logout.textContent = "login";
+      }
+  }
+
+  // Mettre à jour le texte du lien lors du chargement de la page
+  updateLogoutText();
+
+  // Gérer le clic sur le bouton de déconnexion
+  logout.addEventListener("click", function() {
+      const loged = window.sessionStorage.getItem("loged");
+
+      if (loged === "true") {
+          window.sessionStorage.setItem("loged", "false");
+      } else {
+          window.sessionStorage.setItem("loged", "true");
+      }
+      // Mettre à jour le texte du lien après connexion ou déconnexion
+      updateLogoutText();
+  });
+});
+
+
+
+
+
+
+
+
+
 

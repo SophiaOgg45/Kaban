@@ -635,6 +635,7 @@ body{
 }
 
 .preview img {
-    max-width: 100%; /* Redimensionner l'image pour s'adapter à la largeur de son conteneur */
-    max-height: 300px; /* Limiter la hauteur de l'image */
+    max-width: 100%; 
+    max-height: 300px; 
 }
+
