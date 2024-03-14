@@ -8,7 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const returnButton = document.querySelector('.return');
     const galleryList = document.querySelector('.gallery-list');
     const categorieSelect = document.getElementById('categorie-photo');
+    const closeButtonAddModal = document.querySelector('.close-add');
+  
 
+ 
     modifierButton.addEventListener('click', function () {
         modal.style.display = 'flex';
         addModal.style.display = 'none';
@@ -16,6 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     closeButton.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    
+    closeButtonAddModal.addEventListener('click', function () { 
         modal.style.display = 'none';
     });
 
@@ -64,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             updateGalleryInModal();
             // Actualiser la galerie d'images sur la page principale
             updateGalleryOnMainPage();
+               
         })
         .catch(error => {
             console.error('Erreur lors de la suppression du travail :', error);
@@ -114,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 // Nettoyer la galerie actuelle
                 galleryList.innerHTML = "";
+
                 // Ajouter les nouvelles images à la galerie
                 data.forEach(work => {
                     const figure = document.createElement("figure");
@@ -125,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     img.alt = work.title;
     
                     trashIcon.classList.add('fa', 'fa-trash-alt', 'hidden'); // Ajouter une classe 'hidden' pour masquer l'icône
-                    // trashIcon.style.display = 'none'; // Vous pouvez utiliser cette ligne si vous n'utilisez pas de classe 'hidden'
+                    trashIcon.style.display = 'none'; // Vous pouvez utiliser cette ligne si vous n'utilisez pas de classe 'hidden'
     
                     figure.appendChild(img);
                     figure.appendChild(trashIcon);
@@ -202,3 +212,115 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Erreur lors de la récupération des données :', error);
         });
 });
+
+function displayAddedPhoto() {
+    const inputFile = document.querySelector('.add-new-photo input');
+    const labelFile = document.querySelector('.add-new-photo label');
+    const modalImg = document.querySelector('.modal-stop.modal-add .preview');
+
+    // Ajouter un événement pour écouter le changement de fichier
+    inputFile.addEventListener('change', function(event) {
+        const file = event.target.files[0]; // Obtenir le fichier sélectionné
+        if (file) {
+            // Créer un objet URL à partir du fichier
+            const imgUrl = URL.createObjectURL(file);
+
+            // Afficher l'image dans la fenêtre modale
+            modalImg.innerHTML = `<img src="${imgUrl}" alt="Photo ajoutée">`;
+        }
+    });
+}
+
+// Appel de la fonction pour afficher la photo ajoutée
+displayAddedPhoto();
+
+
+
+function submitPhotoForm() {
+    const form = document.querySelector('.form-photo');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêcher le formulaire de se soumettre normalement
+
+        // Récupérer les valeurs du formulaire
+        const title = document.getElementById('title-photo').value;
+        const category = document.getElementById('categorie-photo').value;
+        const file = document.getElementById('file').files[0]; // Obtenir le fichier sélectionné
+
+        if (title && category && file) {
+            // Créer un objet FormData pour envoyer les données du formulaire
+            const formData = new FormData();
+            formData.append('image', file); // Ajouter le fichier image
+            formData.append('title', title); // Ajouter le titre
+            formData.append('category', category); // Ajouter la catégorie
+ // Récupérer le jeton d'authentification depuis la session storage
+ const token = sessionStorage.getItem('Token');
+            // Envoyer les données du formulaire via fetch
+            fetch('http://localhost:5678/api/works', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                    // Le type de contenu est défini automatiquement comme 'multipart/form-data'
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de l\'envoi du formulaire.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Si la réponse est réussie, vous pouvez traiter les données retournées ici
+                console.log('Réponse du serveur :', data);
+                // Réinitialiser le formulaire
+                form.reset();
+                // Appeler la fonction pour ajouter la nouvelle photo à la galerie
+                addPhotoToGallery(data);
+             
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'envoi du formulaire :', error);
+            });
+        } else {
+            console.error('Veuillez remplir tous les champs du formulaire.');
+        }
+    });
+}
+
+// Appeler la fonction pour soumettre le formulaire lorsque le document est chargé
+document.addEventListener("DOMContentLoaded", function () {
+    submitPhotoForm();
+});
+
+async function addPhotoToGallery(photoData) {
+    const galleryList = document.querySelector('.gallery');
+
+    try {
+        // Utilisez directement les données de la nouvelle photo (photoData) plutôt que de faire une nouvelle requête fetch
+        const newWork = photoData;
+
+        // Créer un nouvel élément figure pour la nouvelle photo
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        const title = document.createElement("figcaption"); 
+
+        // Définir les attributs de l'image
+        img.src = newWork.imageUrl;
+        img.alt = newWork.title;
+
+        // Définir le texte du titre
+        title.textContent = newWork.title;
+
+        // Ajouter l'image et le titre à la figure
+        figure.appendChild(img);
+        figure.appendChild(title);
+
+        // Ajouter la nouvelle figure à la galerie
+        galleryList.appendChild(figure);
+        console.log('Nouvelle photo ajoutée à la galerie avec succès.');
+    } catch (error) {
+        console.error('Erreur lors de l\'ajout de la nouvelle photo à la galerie :', error);
+    }
+}

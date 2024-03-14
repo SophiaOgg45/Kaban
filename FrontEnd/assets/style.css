@@ -523,14 +523,6 @@ body{
 	cursor: pointer;
 }
 
-.message-deleted {
-	color: red;
-	display: none; 
-	justify-content: center;
-	margin-top: 10px;
-	font-size: 16px;
-	font-weight: 700;
-}
 
 .modal-add ,
 .modal-deleted {
@@ -635,8 +627,14 @@ body{
 	border: none;
 	margin-top: 32px;
 	margin-bottom: 45px;
+	cursor: pointer;
 }
 
 .hidden {
     display: none;
+}
+
+.preview img {
+    max-width: 100%; /* Redimensionner l'image pour s'adapter à la largeur de son conteneur */
+    max-height: 300px; /* Limiter la hauteur de l'image */
 }
