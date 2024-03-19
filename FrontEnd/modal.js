@@ -9,23 +9,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const galleryList = document.querySelector('.gallery-list');
     const categorieSelect = document.getElementById('categorie-photo');
     const closeButtonAddModal = document.querySelector('.close-add');
-  
 
- 
+
+
     modifierButton.addEventListener('click', function () {
         modal.style.display = 'flex';
         addModal.style.display = 'none';
 
     });
 
-    
+
 
     closeButton.addEventListener('click', function () {
         modal.style.display = 'none';
     });
 
-    
-    closeButtonAddModal.addEventListener('click', function () { 
+
+    closeButtonAddModal.addEventListener('click', function () {
         modal.style.display = 'none';
     });
 
@@ -45,12 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
         modalGallery.style.display = 'flex';
     });
 
-   
-    
+
+
 
     function deleteWork(workId) {
         const token = sessionStorage.getItem('Token');
-    
+
         fetch(`http://localhost:5678/api/works/${workId}`, {
             method: 'DELETE',
             headers: {
@@ -59,23 +59,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP! Statut : ${response.status}`);
-            }
-            // Actualiser la galerie d'images dans la modale
-            updateGalleryInModal();
-            // Actualiser la galerie d'images sur la page principale
-            updateGalleryOnMainPage();
-               
-        })
-        .catch(error => {
-            console.error('Erreur lors de la suppression du travail :', error);
-            // Gérer l'erreur de suppression du travail
-            console.log('Détails de l\'erreur :', error.message)
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP! Statut : ${response.status}`);
+                }
+                // Actualiser la galerie d'images dans la modale
+                updateGalleryInModal();
+                // Actualiser la galerie d'images sur la page principale
+                updateGalleryOnMainPage();
+
+            })
+            .catch(error => {
+                console.error('Erreur lors de la suppression du travail :', error);
+                // Gérer l'erreur de suppression du travail
+                console.log('Détails de l\'erreur :', error.message)
+            });
     }
-    
+
     function updateGalleryInModal() {
         // Réinitialiser la galerie d'images dans la modale avec les données les plus récentes
         const modalGallery = document.querySelector('.gallery-list');
@@ -91,12 +91,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     const figure = document.createElement("figure");
                     const img = document.createElement("img");
                     const trashIcon = document.createElement("i");
-    
+
                     img.src = work.imageUrl;
                     img.alt = work.title;
-    
+
                     trashIcon.classList.add('fa', 'fa-trash-alt');
-    
+
                     figure.appendChild(img);
                     figure.appendChild(trashIcon);
                     figure.dataset.workId = work.id;
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Erreur lors de la récupération des données :', error);
             });
     }
-    
+
     function updateGalleryOnMainPage() {
         // Réinitialiser la galerie d'images sur la page principale avec les données les plus récentes
         const galleryList = document.querySelector('.gallery');
@@ -125,13 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     const img = document.createElement("img");
                     const trashIcon = document.createElement("i");
                     const title = document.createTextNode(work.title); // Créer un nœud de texte pour le titre
-    
+
                     img.src = work.imageUrl;
                     img.alt = work.title;
-    
+
                     trashIcon.classList.add('fa', 'fa-trash-alt', 'hidden'); // Ajouter une classe 'hidden' pour masquer l'icône
                     trashIcon.style.display = 'none'; // Vous pouvez utiliser cette ligne si vous n'utilisez pas de classe 'hidden'
-    
+
                     figure.appendChild(img);
                     figure.appendChild(trashIcon);
                     figure.appendChild(title); // Ajouter le titre à la figure
@@ -143,13 +143,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Erreur lors de la récupération des données :', error);
             });
     }
-    
-    
-    
-    
-    
- 
-    
+
+
+
+
+
+
+
 
     galleryList.addEventListener('click', function (event) {
         if (event.target.classList.contains('fa-trash-alt')) {
@@ -224,7 +224,7 @@ function displayAddedPhoto() {
     const modalImg = document.querySelector('.modal-stop.modal-add .preview');
 
     // Ajouter un événement pour écouter le changement de fichier
-    inputFile.addEventListener('change', function(event) {
+    inputFile.addEventListener('change', function (event) {
         const file = event.target.files[0]; // Obtenir le fichier sélectionné
         if (file) {
             // Créer un objet URL à partir du fichier
@@ -245,7 +245,7 @@ displayAddedPhoto()
 function submitPhotoForm() {
     const form = document.querySelector('.form-photo');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault(); // Empêcher le formulaire de se soumettre normalement
 
         // Récupérer les valeurs du formulaire
@@ -259,8 +259,8 @@ function submitPhotoForm() {
             formData.append('image', file); // Ajouter le fichier image
             formData.append('title', title); // Ajouter le titre
             formData.append('category', category); // Ajouter la catégorie
- // Récupérer le jeton d'authentification depuis la session storage
- const token = sessionStorage.getItem('Token');
+            // Récupérer le jeton d'authentification depuis la session storage
+            const token = sessionStorage.getItem('Token');
             // Envoyer les données du formulaire via fetch
             fetch('http://localhost:5678/api/works', {
                 method: 'POST',
@@ -271,29 +271,29 @@ function submitPhotoForm() {
                     // Le type de contenu est défini automatiquement comme 'multipart/form-data'
                 },
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erreur lors de l\'envoi du formulaire.');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Si la réponse est réussie, vous pouvez traiter les données retournées ici
-                console.log('Réponse du serveur :', data);
-                // Réinitialiser le formulaire
-                form.reset();
-                // Appeler la fonction pour ajouter la nouvelle photo à la galerie
-                addPhotoToGallery(data);
-                document.querySelector('.modal').style.display = 'none';
-                window.location.reload();
-                
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de l\'envoi du formulaire.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Si la réponse est réussie, vous pouvez traiter les données retournées ici
+                    alert('Le projet a été ajouté avec succès !');
+                    // Réinitialiser le formulaire
+                    form.reset();
+                    // Appeler la fonction pour ajouter la nouvelle photo à la galerie
+                    addPhotoToGallery(data);
+                    document.querySelector('.modal').style.display = 'none';
+                    window.location.reload();
 
-            })
-            .catch(error => {
-                console.error('Erreur lors de l\'envoi du formulaire :', error);
-            });
+
+                })
+                .catch(error => {
+                    alert('Erreur lors de l\'envoi du formulaire :', error);
+                });
         } else {
-            console.error('Veuillez remplir tous les champs du formulaire.');
+            alert('Veuillez remplir tous les champs du formulaire.');
         }
     });
 }
@@ -313,7 +313,7 @@ async function addPhotoToGallery(photoData) {
         // Créer un nouvel élément figure pour la nouvelle photo
         const figure = document.createElement("figure");
         const img = document.createElement("img");
-        const title = document.createElement("figcaption"); 
+        const title = document.createElement("figcaption");
 
         // Définir les attributs de l'image
         img.src = newWork.imageUrl;

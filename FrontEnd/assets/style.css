@@ -135,26 +135,35 @@ table {
 }
 
 /** end reset css**/
-body {
+header,
+footer,
+section,
+main {
 	max-width: 1140px;
 	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
 
+#edition {
+	font-family: 'Work Sans';
+	font-size: 14px;
+
+}
 
 
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0;
-	
+	margin: 50px;
+
+
 
 }
 
 section {
 	margin: 50px 0;
-	
+
 
 }
 
@@ -326,19 +335,19 @@ footer nav ul {
 
 /*login*/
 
-body{
-	background-color: rgba(255,254,248,255);
+body {
+	background-color: rgba(255, 254, 248, 255);
 }
 
-#logout{
+#logout {
 	display: none;
 }
 
-#login{
-	display:block
+#login {
+	display: block
 }
 
-#connexion{
+#connexion {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -347,35 +356,36 @@ body{
 
 }
 
-#connexion h2{
+#connexion h2 {
 	margin-bottom: 20px;
 }
 
-#connexion form{
+#connexion form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.connexionForm{
+.connexionForm {
 	display: flex;
 	flex-direction: column;
 	margin-top: 25px;
 }
 
-#connexion button{
+#connexion button {
 	margin-top: 25px;
 }
 
-#email, #password{
+#email,
+#password {
 	width: 300px;
 	height: 40px;
-	box-shadow: 0px 0px 15px rgba(244,243,237,255);
+	box-shadow: 0px 0px 15px rgba(244, 243, 237, 255);
 	border-width: 0px;
-	
+
 }
 
-#connexion label{
+#connexion label {
 	font-family: 'Syne';
 	font-size: 0.9em;
 	color: rgba(0, 0, 0, 0.756);
@@ -383,9 +393,9 @@ body{
 
 }
 
-#submitUserInfo{
+#submitUserInfo {
 	background-color: #1D6154;
-	border-radius: 60px ;
+	border-radius: 60px;
 	border-width: 0px;
 	color: white;
 	cursor: pointer;
@@ -397,42 +407,42 @@ body{
 	width: 150px;
 }
 
-#connexion a{
+#connexion a {
 	margin-top: 5px;
 	font-size: 0.9em;
 	text-decoration: underline;
 }
 
-#edition  {
-  display: flex;
-  justify-content: center;
-  background-color: black;
-  color: white;
-  padding: 1em;
-  gap: 1em;
-  
-  
+#edition {
+	display: flex;
+	justify-content: center;
+	background-color: black;
+	color: white;
+	padding: 1em;
+	gap: 1em;
+
+
 }
 
 
-  
+
 
 /* Modal */
 
-.modifier{
-    display: flex;
+.modifier {
+	display: flex;
 	position: absolute;
 	right: 27rem;
 	bottom: -1rem;
 	cursor: pointer;
-	
+
 }
 
-#pen{
+#pen {
 	margin-right: 0.5rem;
 }
 
-.modal{
+.modal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -442,15 +452,15 @@ body{
 	justify-content: center;
 	background-color: rgba(0, 0, 0, 0.30);
 	display: none;
-	
-	
+
+
 }
 
 .modal-content {
 	background-color: #fff;
 	overflow: hidden;
 	border-radius: 10px;
-	
+
 }
 
 
@@ -458,12 +468,14 @@ body{
 	display: flex;
 	justify-content: end;
 }
-.close-deleted, .close-add {
+
+.close-deleted,
+.close-add {
 	cursor: pointer;
 	font-size: 24px;
 	margin-top: 26px;
 	margin-right: 30px;
-	
+
 }
 
 .title-modal {
@@ -474,37 +486,38 @@ body{
 	font-weight: 400;
 	margin-top: 10px;
 }
-.fa-trash-alt
-{
+
+.fa-trash-alt {
 	color: white;
-    position: relative;
-    top: -102px;
-    left: 45px;
-    background: black ;
-    width: 15px;
-    height: 12px;
-    display: flex;
-    justify-content: center;
+	position: relative;
+	top: -102px;
+	left: 45px;
+	background: black;
+	width: 15px;
+	height: 12px;
+	display: flex;
+	justify-content: center;
 	font-size: 10px;
 	padding-top: 1px;
 	cursor: pointer;
-    
+
 }
+
 .gallery-list {
 
-	
+
 	border-bottom: 1px solid #b3b3b3;
 	margin-right: 100px;
 	margin-left: 100px;
 	margin-top: 30px;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
-	gap:5px;
+	gap: 5px;
 }
 
 .gallery-list img {
-    width: 100%;
-    height: auto;
+	width: 100%;
+	height: auto;
 	margin-bottom: 20px;
 }
 
@@ -539,11 +552,11 @@ body{
 
 .modal-add,
 .modal-deleted {
-   display: flex;
+	display: flex;
 	flex-direction: column;
 	width: 42%;
 	height: auto;
-	
+
 }
 
 
@@ -561,11 +574,11 @@ body{
 	cursor: pointer;
 }
 
-.form-photo{
+.form-photo {
 	display: flex;
 	flex-direction: column;
 	margin: 0 55px;
-	
+
 }
 
 .add-new-photo {
@@ -584,7 +597,8 @@ body{
 	flex-direction: column;
 	align-items: center;
 }
-.picture{
+
+.picture {
 	font-size: 76px;
 	color: #b9c5cc;
 }
@@ -611,17 +625,18 @@ body{
 	font-size: 10px;
 	color: #444;
 	margin-bottom: 6px;
-	margin-top:-13px ;
+	margin-top: -13px;
 }
 
-.title-categorie{
+.title-categorie {
 	color: #3D3D3D;
 	margin-top: 10px;
 	padding-bottom: 30px;
 	border-bottom: 1px solid #b3b3b3;
 }
 
-#title-photo, #categorie-photo {
+#title-photo,
+#categorie-photo {
 	width: 100%;
 	height: 50px;
 	border: none;
@@ -647,13 +662,12 @@ body{
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 .preview img {
 	width: 30%;
 	height: auto;
 	margin-left: 36%;
-	
-}
 
+}
