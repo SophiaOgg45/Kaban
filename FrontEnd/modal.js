@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+    
+
     closeButton.addEventListener('click', function () {
         modal.style.display = 'none';
     });
@@ -43,16 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
         modalGallery.style.display = 'flex';
     });
 
-    function updateMainPageGallery(workId) {
-        const figure = document.querySelector(`figure[data-work-id="${workId}"]`);
-        if (figure) {
-            figure.remove(); // Suppression de l'élément du DOM sur la page principale
-        } else {
-            console.log(`Aucune figure trouvée pour le travail ID: ${workId}`);
-        }
-    }
    
     
+
     function deleteWork(workId) {
         const token = sessionStorage.getItem('Token');
     
@@ -213,6 +208,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+
+
+function hideAddPhotoContent() {
+    const contentAddPhoto = document.querySelector('.content-add-photo');
+    if (contentAddPhoto) {
+        contentAddPhoto.style.display = 'none';
+    }
+}
+
+// Ajoutez cette fonction à la fin de votre script
 function displayAddedPhoto() {
     const inputFile = document.querySelector('.add-new-photo input');
     const labelFile = document.querySelector('.add-new-photo label');
@@ -227,14 +232,15 @@ function displayAddedPhoto() {
 
             // Afficher l'image dans la fenêtre modale
             modalImg.innerHTML = `<img src="${imgUrl}" alt="Photo ajoutée">`;
+
+            // Masquer les éléments de la div content-add-photo
+            hideAddPhotoContent();
         }
     });
 }
 
-// Appel de la fonction pour afficher la photo ajoutée
-displayAddedPhoto();
 
-
+displayAddedPhoto()
 
 function submitPhotoForm() {
     const form = document.querySelector('.form-photo');
@@ -278,7 +284,10 @@ function submitPhotoForm() {
                 form.reset();
                 // Appeler la fonction pour ajouter la nouvelle photo à la galerie
                 addPhotoToGallery(data);
-             
+                document.querySelector('.modal').style.display = 'none';
+                window.location.reload();
+                
+
             })
             .catch(error => {
                 console.error('Erreur lors de l\'envoi du formulaire :', error);

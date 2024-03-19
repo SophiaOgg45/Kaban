@@ -129,9 +129,43 @@ filtersContainer.addEventListener("click", (event) => {
 });
 
 
+// document.addEventListener("DOMContentLoaded", function() {
+//   // Sélection de l'élément "logout"
+//   const logout = document.querySelector("header nav .logout");
+
+//   // Fonction pour mettre à jour le texte du lien en fonction de l'état de connexion
+//   function updateLogoutText() {
+//       const loged = window.sessionStorage.getItem("loged");
+
+//       if (loged === "true") {
+//           logout.textContent = "logout";
+//       } else {
+//           logout.textContent = "login";
+//       }
+//   }
+
+//   // Mettre à jour le texte du lien lors du chargement de la page
+//   updateLogoutText();
+
+//   // Gérer le clic sur le bouton de déconnexion
+//   logout.addEventListener("click", function() {
+//       const loged = window.sessionStorage.getItem("loged");
+
+//       if (loged === "true") {
+//           window.sessionStorage.setItem("loged", "false");
+//       } else {
+//           window.sessionStorage.setItem("loged", "true");
+//       }
+//       // Mettre à jour le texte du lien après connexion ou déconnexion
+//       updateLogoutText();
+//   });
+// });
+
 document.addEventListener("DOMContentLoaded", function() {
   // Sélection de l'élément "logout"
   const logout = document.querySelector("header nav .logout");
+  const editionMode = document.getElementById("edition"); // Sélection de l'élément du mode édition
+  const modifierButtons = document.querySelectorAll(".modifier"); // Sélection de tous les boutons de modification
 
   // Fonction pour mettre à jour le texte du lien en fonction de l'état de connexion
   function updateLogoutText() {
@@ -139,8 +173,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
       if (loged === "true") {
           logout.textContent = "logout";
+          editionMode.style.display = "flex"; // Utilisation de flex pour afficher le mode édition si connecté
+          modifierButtons.forEach(button => button.style.display = "flex"); // Utilisation de flex pour afficher les boutons de modification si connecté
       } else {
           logout.textContent = "login";
+          editionMode.style.display = "none"; // Masquer le mode édition si déconnecté
+          modifierButtons.forEach(button => button.style.display = "none"); // Masquer les boutons de modification si déconnecté
       }
   }
 
@@ -160,13 +198,3 @@ document.addEventListener("DOMContentLoaded", function() {
       updateLogoutText();
   });
 });
-
-
-
-
-
-
-
-
-
-
