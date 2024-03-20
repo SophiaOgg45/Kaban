@@ -201,11 +201,17 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
+nav a {
+	text-decoration: none;
+	color: black; /* Couleur par défaut des liens */
+}
 
 li:hover {
 	color: #B1663C;
 }
-
+#logout{
+	cursor: pointer;
+}
 #introduction {
 	display: flex;
 	align-items: center;
@@ -312,6 +318,8 @@ footer nav ul {
 	margin: 30px;
 	margin-top: 45px;
 	margin-bottom: 45px;
+	
+	
 }
 
 .filters button {
@@ -325,6 +333,7 @@ footer nav ul {
 	background-color: transparent;
 	font-family: 'Syne';
 	cursor: pointer;
+	
 
 }
 
@@ -334,18 +343,14 @@ footer nav ul {
 }
 
 /*login*/
-
+.Stylelogin{
+	font-weight: bold;
+}
 body {
 	background-color: rgba(255, 254, 248, 255);
 }
 
-#logout {
-	display: none;
-}
 
-#login {
-	display: block
-}
 
 #connexion {
 	display: flex;
@@ -413,16 +418,18 @@ body {
 	text-decoration: underline;
 }
 
-#edition {
+#edition  {
 	display: flex;
 	justify-content: center;
 	background-color: black;
 	color: white;
 	padding: 1em;
 	gap: 1em;
-
+	font-family: 'Work Sans';
+	display: none;
 
 }
+
 
 
 
@@ -459,7 +466,7 @@ body {
 .modal-content {
 	background-color: #fff;
 	overflow: hidden;
-	border-radius: 10px;
+	border-radius: 10px;	
 
 }
 
