@@ -128,6 +128,8 @@ filtersContainer.addEventListener("click", (event) => {
   }
 });
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const logoutButton = document.getElementById("logout");
   const loginButton = document.getElementById("login");
@@ -154,25 +156,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Gestion du clic sur le bouton de déconnexion
   logoutButton.addEventListener("click", function () {
-      sessionStorage.removeItem("loggedIn"); // Supprimer complètement la session
-      window.location.href = "login.html"; // Rediriger vers la page de connexion
+      sessionStorage.removeItem("Token");
+      updateUI(false);
+
   });
 
-  // Gestion du clic sur le bouton de connexion
-  loginButton.addEventListener("click", function () {
-      sessionStorage.setItem("loggedIn", "true");
-      updateUI(true);
-  });
 
   // Vérifier l'état de connexion lors du chargement de la page
-  const loggedIn = sessionStorage.getItem("loggedIn");
-  if (loggedIn === "true") {
+  const loggedIn = sessionStorage.getItem("Token");
+  if (loggedIn) {
       updateUI(true);
   } else {
       updateUI(false);
   }
 });
-
-
 
 

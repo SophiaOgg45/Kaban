@@ -1,7 +1,7 @@
-//Page de connexion 
 const formLogin = document.querySelector("#formLogin");
+const loginButton = document.getElementById("login");
 
-const btnLogin = formLogin.addEventListener("submit", (event) => {
+formLogin.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(formLogin);
     fetch("http://localhost:5678/api/users/login", {
@@ -15,16 +15,23 @@ const btnLogin = formLogin.addEventListener("submit", (event) => {
             password: formData.get("password"),
         }),
     })
-        .then((response) => response.json())
-        .then((data) => {
-
-            if (data.message || data.error) {
-                alert("Erreur dans l'identifiant ou le mot de passe");
-            } else {
-                sessionStorage.setItem("Token", data.token);
-                sessionStorage.setItem("isConnected", JSON.stringify(true));
-                window.location.replace("index.html");
-            }
-        })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.message || data.error) {
+            alert("Erreur dans l'identifiant ou le mot de passe");
+        } else {
+            sessionStorage.setItem("Token", data.token);
+            window.location.replace("index.html");
+        }
+    });
 });
+
+
+
+
+
+
+
+
+
 
